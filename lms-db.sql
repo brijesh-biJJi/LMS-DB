@@ -57,6 +57,11 @@ ON f.candidate_id = cs.candidate_id
 WHERE DATE_FORMAT(cs.complete_date,'%M')='February';
 
 12-find name of candidates which is ending date accounding to joining date if joining date is 22-02-2019
+select * from 
+fellowship_candidate f
+inner join candidate_stack cs
+on f.candidate_id=cs.candidate_id
+where f.Joinig_Date=cs.complete_date
 
 
 13-find all candidates which is passed out in 2019 year
@@ -74,7 +79,7 @@ ON fc.candidate_id = cq.candidate_id
 WHERE cq.degree_name = 'MCA';
 
 15-how many candiates which is having last month
-
+select * from Fellowship_Candidate f where ROUND(DATEDIFF(CURDATE(),f.joinig_Date)/30) =4;
 
 
 
@@ -123,7 +128,13 @@ ON r.company_id = c.company_id
 WHERE c.company_id IS NOT NULL;
 
 22-find all condidate and mentors which is related to lab= banglore/mumbai/pune.
-
+select f.first_name from fellowship_candidate f
+where f.hired_lab ="Bangalore"
+union
+select m.mentor_name from mentor m
+left join lab l
+on m.lab_id=l.lab_id
+where l.location='Bangalore'
 
 
 23-find buddy mententors and ideation mentor and which technology assign to perticular candidate if candidate id is 6
