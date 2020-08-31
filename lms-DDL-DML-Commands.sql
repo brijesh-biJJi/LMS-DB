@@ -88,6 +88,10 @@ Remark                 DECIMAL(10,0) DEFAULT NULL,
 PRIMARY KEY (candidate_id)
 );
 
+Update Querey:
+---------------
+update fellowship_candidate set hired_lab='Bangalore' where candidate_id in (3,5,7,9);
+
 ALTER QUERY:
 --------------
 ALTER TABLE fellowship_candidate 
@@ -123,6 +127,13 @@ Birth_Date,Is_Birth_Date_Verified,Parent_Name,Parents_Mobile_Number,Local_Addres
 VALUES
 ('Baijith','S','Bhai','baiji@gmail.com','Mangalore','MCA','2019-12-08','9935600625',575010,'HSR',4,2,3,8,
 '1995-10-13',1,'Shiva',1234567890,'Mangalore','Mangalore','2019-12-20','Accepted','Verified');
+INSERT INTO Fellowship_Candidate
+(First_Name,Middle_Name,Last_Name,Email,Hired_City,Degree,Hired_Date,Mobile_Number,Permanent_Pincode,Hired_Lab,Attitude,Communication_Remark,Knowledge_Remark
+,Aggregate_Remark,
+Birth_Date,Is_Birth_Date_Verified,Parent_Name,Parents_Mobile_Number,Local_Address,Permanent_Address,Joinig_Date,Candidate_Status,Document_Status)
+VALUES
+('Shruti','V','Poojary','shruti@gmail.com','Mangalore','MCA','2020-03-08','9935600925',575010,'HSR',4,2,3,8,
+'1995-01-23',1,'Vishwanath',1234567890,'Mangalore','Mangalore','2020-04-20','Accepted','Verified');
 
 
 Candidate Bank Details:
