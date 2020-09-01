@@ -158,13 +158,16 @@ mouse int(11) NOT NULL,
 technology varchar(100) NOT NULL,
 files_changed int(11) NOT NULL,
 KEY `FK_user_engagement_mis_candidate_id` (`candidate_id`),
-  CONSTRAINT `FK_user_engagemnt_mis_candidate_id` FOREIGN KEY (`candidate_id`) REFERENCES `fellowship_candidates` (`id`),
+  CONSTRAINT `FK_user_engagemnt_mis_candidate_id` FOREIGN KEY (`candidate_id`) REFERENCES `fellowship_candidates` (`candidate_id`),
 PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 Alter Query:
 ---------------
 ALTER TABLE user_engagement_mis MODIFY id INT NOT NULL AUTO_INCREMENT;
+
+    ALTER TABLE user_engagement_mis
+ADD FOREIGN KEY (candidate_id) REFERENCES fellowship_candidate(candidate_id);
 
 Update Query:
 --------------

@@ -238,6 +238,11 @@ creator_user             VARCHAR (30) DEFAULT NULL,
  PRIMARY KEY (company_id)
 );
 
+Alter Query:
+------------
+ALTER TABLE company 
+ADD CONSTRAINT company_name_unique UNIQUE (company_name);
+
 INSERT QUERY:
 --------------
 INSERT INTO Company
@@ -493,6 +498,8 @@ creator_user VARCHAR (30) DEFAULT NULL,
  PRIMARY KEY (requirement_id),
 FOREIGN KEY (tech_stack_id
 ) REFERENCES tech_stack(tech_stack_id),
+FOREIGN KEY (company_id
+) REFERENCES company(company_id),
 FOREIGN KEY (tech_type_id
 ) REFERENCES tech_type(tech_type_id),
 FOREIGN KEY (maker_program_id
@@ -504,7 +511,13 @@ FOREIGN KEY (ideation_engg_id
 FOREIGN KEY (buddy_engg_id) REFERENCES mentor(mentor_id)
 );
 
+Alter Query:
+----------------
+ALTER TABLE requirement
+ADD FOREIGN KEY (company_id) REFERENCES company(company_id);
 INSERT QUERY:
+
+
 --------------
 INSERT INTO lmsapplication.requirement
 (company_id,requested_month,city,is_doc_verifrication,no_of_engg,tech_stack_id,tech_type_id,maker_program_id,lead_id,ideation_engg_id,buddy_engg_id)
