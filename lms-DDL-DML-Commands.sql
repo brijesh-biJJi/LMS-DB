@@ -13,10 +13,43 @@ CREATE TABLE user_details(
     PRIMARY KEY (user_id)
 );
 
+TRIGGER CAMMOAND:
+_________________
+CREATE TRIGGER tr_ins_User
+BEFORE INSERT ON  user_details
+FOR EACH ROW
+SET NEW.last_name = UPPER(NEW.last_name);
+
 INSERT QUERY:
 --------------
 INSERT INTO user_details VALUES(1,'brijesh@gmail.com','Brijesh','Salian','abcd',7708144321,true,'2019-12-23','Briju');
 INSERT INTO user_details VALUES(2,'baijith@gmail.com','Baijith','bhai','baiji123',898686252,true,'2019-11-21','Briju');
+
+INSERT INTO user_details VALUES(4,'uday@gmail.com','Uday','chandra','uday123',897686252,true,'2020-12-21','Briju');
+
+STORED PROCEDURE:
+--------------------
+
+ DROP PROCEDURE IF EXISTS pro_user_details;
+ DELIMITER //
+ CREATE PROCEDURE pro_user_details(IN id INT, 
+									IN email VARCHAR(30), 
+                                    IN first_name VARCHAR(30),
+                                    IN last_name VARCHAR(30),
+                                    IN pass VARCHAR(20), 
+                                    IN contact BIGINT,
+                                    IN verified BOOLEAN,
+                                    IN  creator_stamp  DATETIME,
+                                    IN creator_user VARCHAR (30))
+BEGIN 
+	INSERT INTO user_details VALUES(id,email,first_name,last_name,pass,contact,verified,creator_stamp,creator_user);
+    SELECT * FROM user_details;
+END//
+DELIMITER ;
+
+call pro_user_details(4,'uday@gmail.com','Uday','chandra','uday123',897686252,true,'2020-12-21','Briju');
+
+
 
 Hired Candidate:
 ----------------
@@ -134,6 +167,13 @@ Birth_Date,Is_Birth_Date_Verified,Parent_Name,Parents_Mobile_Number,Local_Addres
 VALUES
 ('Shruti','V','Poojary','shruti@gmail.com','Mangalore','MCA','2020-03-08','9935600925',575010,'HSR',4,2,3,8,
 '1995-01-23',1,'Vishwanath',1234567890,'Mangalore','Mangalore','2020-04-20','Accepted','Verified');
+INSERT INTO Fellowship_Candidate
+(First_Name,Middle_Name,Last_Name,Email,Hired_City,Degree,Hired_Date,Mobile_Number,Permanent_Pincode,Hired_Lab,Attitude,Communication_Remark,Knowledge_Remark
+,Aggregate_Remark,
+Birth_Date,Is_Birth_Date_Verified,Parent_Name,Parents_Mobile_Number,Local_Address,Permanent_Address,Joinig_Date,Candidate_Status,Document_Status)
+VALUES
+('Rohit','H','Kanchan','rohit@gmail.com','Mangalore','Engg','2020-03-08','9832600925',575010,'Bangalore',4,2,3,8,
+'1990-05-23',1,'HariKrishna',1234567890,'Mangalore','Mangalore','2020-05-20','Accepted','Verified');
 
 
 Candidate Bank Details:
@@ -515,9 +555,8 @@ Alter Query:
 ----------------
 ALTER TABLE requirement
 ADD FOREIGN KEY (company_id) REFERENCES company(company_id);
+
 INSERT QUERY:
-
-
 --------------
 INSERT INTO lmsapplication.requirement
 (company_id,requested_month,city,is_doc_verifrication,no_of_engg,tech_stack_id,tech_type_id,maker_program_id,lead_id,ideation_engg_id,buddy_engg_id)
@@ -561,3 +600,20 @@ INSERT INTO Candidate_Stack
 (requirement_id,candidate_id,assign_date,complete_date)
 VALUES
 (1,5,'2019-12-20','2020-07-25')
+
+
+STORED PROCEDURE:
+------------------
+DELIMITER //
+CREATE PROCEDURE spFS(
+	IN can_id INT
+)
+BEGIN
+	SELECT * 
+ 	FROM fellowship_candidate
+	WHERE candidate_id = can_id;
+END //
+
+DELIMITER ;
+
+call spFS(1)

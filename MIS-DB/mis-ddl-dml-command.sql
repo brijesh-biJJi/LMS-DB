@@ -169,6 +169,17 @@ ALTER TABLE user_engagement_mis MODIFY id INT NOT NULL AUTO_INCREMENT;
     ALTER TABLE user_engagement_mis
 ADD FOREIGN KEY (candidate_id) REFERENCES fellowship_candidate(candidate_id);
 
+ALTER TABLE user_engagement_mis 
+ADD CONSTRAINT candidate_id_unique UNIQUE (candidate_id);
+
+Drop Index Keys:
+----------------
+ALTER TABLE user_engagement_mis DROP INDEX candidate_id_unique;
+
+Show INDEX KEys:
+------------------
+show index from user_engagement_mis;
+
 Update Query:
 --------------
 
@@ -269,5 +280,15 @@ tm.files_changed
 FROM fellowship_candidate as fc
 INNER JOIN temporary_mis as tm
 on fc.email = tm.user_name
+
+
+TRIGGER Commands:
+-------------------
+
+CREATE TRIGGER tr_ins_User_Engagement_Mis
+BEFORE INSERT ON  user_engagement_mis
+FOR EACH ROW
+SET NEW.technology = UPPER(NEW.technology);
+
 
 
