@@ -1,7 +1,4 @@
-3- find all candidate which is present today
-4- find all candidate which is come late today
-5- find all candidate which had gone early yesterday
-6- find all candidate which is come early today
+
 
 1- find all candidate having java technology
 SELECT *
@@ -22,6 +19,19 @@ ON mts.mentor_id= m.mentor_id
 LEFT JOIN Tech_Stack as ts
 ON mts.tech_stack_id= ts.tech_stack_id
 WHERE ts.tech_name='Java';
+
+3- find all candidate which is present today
+SELECT * FROM user_engagement_mis WHERE DATE(date_time) = CURDATE()
+
+4- find all candidate which is come late today
+SELECT * FROM user_engagement_mis ue where hour(ue.Date_Time) > '9:00:00' and DATE(date_time) = CURDATE();
+
+5- find all candidate which had gone early yesterday
+SELECT * FROM user_engagement_mis ue where hour(ue.Date_Time) < '6:00:00' and SUBDATE(NOW(),1);
+
+6- find all candidate which is come early today
+SELECT * FROM user_engagement_mis ue where hour(ue.Date_Time) < '9:00:00' and DATE(date_time) = CURDATE();
+
 
 7- find name of candidate which did not assign technology
 SELECT *
